@@ -157,5 +157,5 @@ src/
 - **依赖**: C++20 + CMake + yaml-cpp（Linux）
 - **关联项目**:
   - [NebulaX](https://github.com/2250127831/NebulaX) — 撮合引擎（本项目交易所侧来源，含撤单双扣减 bug 修复建议 [docs/NEBULAX_FIX_ADVICE.md](docs/NEBULAX_FIX_ADVICE.md)）
-  - NebulaX-Trader — 交易框架（本项目策略/OMS/风控来源，CRTP 策略契约与加权净投票仲裁对齐）
+  - [NebulaX-Trader](https://github.com/2250127831/NebulaX-Trader) — 交易框架（本项目策略/OMS/风控来源，CRTP 策略契约与加权净投票仲裁对齐）
 - **测试数据**: 小样本（`test_data/itch_*.bin`）由 `scripts/gen_test_data.py` 生成并提交；大样本（`itch_sample.bin` 等）为本地软链，指向 `~/NebulaX-Trader/test_data/`，不提交。

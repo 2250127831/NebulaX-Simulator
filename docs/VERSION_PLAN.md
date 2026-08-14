@@ -38,4 +38,4 @@
 ## 关联项目
 
 - [NebulaX](https://github.com/2250127831/NebulaX) — 撮合引擎（本项目的交易所侧来源）
-- NebulaX-Trader — 交易框架（本项目的策略/OMS/风控来源，CRTP 策略契约与加权净投票仲裁对齐）
+- [NebulaX-Trader](https://github.com/2250127831/NebulaX-Trader) — 交易框架（本项目的策略/OMS/风控来源，CRTP 策略契约与加权净投票仲裁对齐）

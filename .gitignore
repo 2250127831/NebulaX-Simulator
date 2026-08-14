@@ -1,0 +1,20 @@
+# 构建
+build/
+build_*/
+cmake-build-*/
+
+# 仿真输出
+results/
+
+# 大数据样本软链（指向 NebulaX-Trader/test_data，各机器路径不同，不提交）
+test_data/itch_sample.bin
+test_data/itch_test_small.bin
+test_data/itch_test_small.expected.bin
+test_data/itch_100mb.bin
+
+# IDE / 临时
+.vscode/
+.idea/
+*.swp
+perf.data
+*.svg

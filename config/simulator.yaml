@@ -1,0 +1,35 @@
+# NebulaX-Simulator 配置
+# 单机、纯内存仿真：历史 ITCH 委托 → 交易所撮合 → 广播 → 交易系统（策略/OMS/风控）订阅。
+
+replay:
+  file: test_data/itch_sample.bin   # 历史 ITCH 二进制（2B 大端长度前缀帧）
+  segment_size: 1000                # ★ 每段回放多少条 ITCH（策略插入节奏；段边界策略下单/撤单）
+  max_messages: 0                   # 0 = 全部
+  order_id_base: 100000000000       # 策略订单 ref 基址（> 历史最大 ref，避免与历史订单冲突）
+
+order_book:
+  enabled: true
+  pool_slots: 1048576               # 策略市场簿挂单池槽位
+  workers: 4                        # 策略 worker 数（locate 分片，单线程顺序执行）
+
+strategy:
+  strategies: [ofi, obi]            # 白名单策略组合（编译期绑定）：ofi（订单流失衡）/ obi（盘口失衡）
+                                    # 支持 [ofi, obi] / [ofi] / [obi] / []（空 = 仅收行情不交易）
+  primary: ofi                      # 主策略（须在 strategies 中；决定下单标的/seq，不单独定方向）
+  weights: {ofi: 1.0, obi: 0.6}     # 投票权重（未列缺省 1.0；加权净投票定方向）
+  vote_threshold: 0.0               # 净投票阈值（0 = 任一策略有信号即按净信号下；
+                                    #   收紧如 1.5 ≈ 要求两策略同向）
+
+risk:
+  # 资金值单位 = 1/10000 元（tick），与全链路价格精度一致（100 ticks = 1 分）
+  max_position: 10000
+  max_daily_loss: 10000000000       # 1e10 ticks = 100 万元
+  initial_equity: 10000000000       # 初始资金 1e10 ticks = 100 万元
+  max_drawdown_pause: 500000000     # 5e8 ticks = 5 万元
+  max_drawdown_flatten: 1000000000  # 1e9 ticks = 10 万元
+
+execution:
+  base_qty: 100                     # 满强度基准下单量
+
+analysis:
+  out_dir: results                  # equity.csv / orders.csv / summary.txt

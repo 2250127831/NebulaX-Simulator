@@ -1,0 +1,30 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libyaml-cpp-dev
+
+      - name: Generate test data (CI 无本地大样本，用脚本生成小样本)
+        run: |
+          python3 scripts/gen_test_data.py test_data
+
+      - name: Configure
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build build -j$(nproc)
+
+      - name: Run unit tests (ctest)
+        run: |
+          cd build && ctest --output-on-failure

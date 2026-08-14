@@ -8,6 +8,10 @@
 
 版本计划见 [docs/VERSION_PLAN.md](docs/VERSION_PLAN.md)。
 
+## 系统架构
+
+![NebulaX-Simulator V1 架构图](docs/images/NebulaX-Simulator V1 架构图.png)
+
 ## 核心数据流（对齐现实量化流程）
 
 ```
@@ -132,6 +136,11 @@ python3 scripts/gen_test_data.py test_data
 ## 目录结构
 
 ```
+docs/
+├── DESIGN.md                      # 设计文档
+├── VERSION_PLAN.md                # 版本规划
+└── images/                        # 架构图
+    └── NebulaX-Simulator V1 架构图.png
 src/
 ├── exchange/    # 交易所侧（迁移自 NebulaX）：撮合引擎、订单簿/池/索引、ITCH 解析
 │   ├── matching_engine.*  order_book.*  order_pool.h  order_map.h  itch_parser.*
